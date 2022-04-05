@@ -2,7 +2,7 @@
 name = "{{ cookiecutter.project_name }}"
 version = "{{ cookiecutter.project_version }}"
 description = "{{ cookiecutter.project_description }}"
-authors = ["<john.doe@email.com>"]
+authors = ["John Doe <john.doe@email.com>"]
 keywords = ["felucca"]
 include = ["{{ cookiecutter.project_slug }}/*.cairo", "{{ cookiecutter.project_slug }}/*/*.cairo"]
 
