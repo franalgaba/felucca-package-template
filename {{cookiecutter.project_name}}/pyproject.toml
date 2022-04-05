@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_name }}"
+version = "{{ cookiecutter.project_version }}"
+description = "{{ cookiecutter.project_description }}"
+authors = ["<john.doe@email.com>"]
+keywords = ["felucca"]
+include = ["{{ cookiecutter.project_slug }}/*.cairo", "{{ cookiecutter.project_slug }}/*/*.cairo"]
+
+[tool.poetry.dependencies]
+python = ">=3.7.11,<3.9"
+ecdsa = "^0.17.0"
+fastecdsa = "^2.2.3"
+sympy = "^1.10"
+cairo-nile = "^0.4.0"
+felucca = "^0.0.3"
+"starknet.py" = "^0.2.0-alpha.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0.1"
+pytest-asyncio = "^0.18.2"
+black = {version = "^22.1.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
