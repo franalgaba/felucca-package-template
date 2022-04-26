@@ -3,24 +3,40 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 
-# Define a storage variable.
+# from onnx_cairo_package.onnx_cairo import Mul, ReduceSum, Add
+from {{ cookiecutter.project_slug }}.c4_tensor_loader import load_tensor_c4
+from {{ cookiecutter.project_slug }}.c3_tensor_loader import load_tensor_c3
+
+
+# result of latest inference
 @storage_var
-func balance() -> (res : felt):
+func inference_result() -> (res : felt):
 end
 
-# Increases the balance by the given amount.
+# Starts the inference computation.
 @external
-func increase_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        amount : felt):
-    let (res) = balance.read()
-    balance.write(res + amount)
+func predict{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        input : felt*):
+
+    # Read Tensors
+    let (c3_node) = load_tensor_c3()
+    let (c4_node) = load_tensor_c4()
+
+    # Read inputs
+    let (zx) = input 
+
+    # Build graph
+    # let (mulx) = Mul(zx, c3)
+    # let (sumx) = ReduceSum(mulx)
+    # let (yhatlog) = Add(sumx, c4)
+    # inference_result.write(yhatlog)
     return ()
 end
 
-# Returns the current balance.
+# Returns the latest inference.
 @view
-func get_balance{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+func get_inference{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
         res : felt):
-    let (res) = balance.read()
+    let (res) = inference_result.read()
     return (res)
 end
