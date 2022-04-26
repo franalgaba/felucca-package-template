@@ -26,10 +26,10 @@ func predict{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
     let (zx) = input 
 
     # Build graph
-    # let (mulx) = Mul(zx, c3)
-    # let (sumx) = ReduceSum(mulx)
-    # let (yhatlog) = Add(sumx, c4)
-    # inference_result.write(yhatlog)
+    let (mulx) = Mul(zx, c3)
+    let (sumx) = ReduceSum(mulx)
+    let (yhatlog) = Add(sumx, c4)
+    inference_result.write(yhatlog)
     return ()
 end
 
